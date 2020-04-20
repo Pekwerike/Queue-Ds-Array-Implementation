@@ -1,19 +1,19 @@
-public class Queue {
+public class Queue <Item>{
     Integer top, bottom = null;
-    String[] arrayForQueue = new String[1];
+    Item[] arrayForQueue = (Item[]) new Object[1];
 
     private Boolean queueIsEmpty(){
         return top == null;
     }
 
     private void resizeArrayQueue(int capacity){
-        String[] holderArray = new String[capacity];
+        Item[] holderArray = (Item[]) new Object[capacity];
         for(int i = 0; i < arrayForQueue.length; i++)
             holderArray[i] = arrayForQueue[i];
         arrayForQueue = holderArray;
     }
 
-    public void enqueue(String inputData){
+    public void enqueue(Item inputData){
         if(bottom == null && top == null){
             bottom = 0;
             top = 0;
@@ -31,24 +31,24 @@ public class Queue {
         }
     }
 
-    public String dequeue(){
+    public Item dequeue(){
         if(!queueIsEmpty()){
             if(top >= arrayForQueue.length - 1 && arrayForQueue[0] == null) top = 0;
             else{
                 resizeArrayQueue(2 * arrayForQueue.length);
             }
-            String itemToOutput = arrayForQueue[top];
+           Item itemToOutput = arrayForQueue[top];
             arrayForQueue[top] = null;
             if(top == bottom) {
                 top = null;
                 bottom = null;
-                arrayForQueue = new String[1];
+                arrayForQueue = (Item[])new Object[1];
             }
             else {
                 top++;
             }
             return itemToOutput;
         }
-        else return "Queue is empty";
+        else return null;
     }
 }
